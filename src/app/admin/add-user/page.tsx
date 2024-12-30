@@ -1,34 +1,38 @@
-export default function AddUserPage() {
-  return (
-    <div>
-      <h1>Add/Edit User</h1>
-      <p>Use this page to add a new user or edit an existing user account.</p>
-    </div>
-  );
-}
-('use client');
+'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
 
 export default function AddUserPage() {
   const router = useRouter();
-  const { id } = router.query; // Retrieve the user ID if it's an edit action
+  const [userId, setUserId] = useState<string | null>(null); // Store the ID in state
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [role, setRole] = useState<string>('Officer');
+  const [error, setError] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Officer');
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  useEffect(() => {
+    if (router.query?.id) {
+      setUserId(router.query.id as string); // Set user ID when available
+    }
+  }, [router.query]);
 
   useEffect(() => {
     // If an ID is present, simulate fetching the user details for editing
-    if (id) {
+    if (userId) {
       const fetchUserDetails = async () => {
         try {
           // Simulate API call with mock data
-          const mockUser = {
-            id,
+          const mockUser: User = {
+            id: userId,
             name: 'John Doe',
             email: 'john@example.com',
             role: 'Officer',
@@ -43,7 +47,7 @@ export default function AddUserPage() {
 
       fetchUserDetails();
     }
-  }, [id]);
+  }, [userId]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -55,8 +59,8 @@ export default function AddUserPage() {
 
     try {
       // Simulate API call to add or update a user
-      if (id) {
-        console.log('Updating user:', { id, name, email, role });
+      if (userId) {
+        console.log('Updating user:', { id: userId, name, email, role });
         setSuccessMessage('User updated successfully!');
       } else {
         console.log('Creating user:', { name, email, role });
@@ -65,7 +69,7 @@ export default function AddUserPage() {
 
       setError('');
       // Reset the form if creating a new user
-      if (!id) {
+      if (!userId) {
         setName('');
         setEmail('');
         setRole('Officer');
@@ -75,22 +79,26 @@ export default function AddUserPage() {
     }
   };
 
+  // Check if userId or router.query.id is available before rendering
+  if (router.isReady && !userId && !router.query?.id) {
+    return (
+      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+        <h1 className="text-2xl font-bold text-center mb-6">Add User</h1>
+        <p>Loading user details...</p>
+      </div>
+    );
+  }
+
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>{id ? 'Edit User' : 'Add User'}</h1>
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+      <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">
+        {userId ? 'Edit User' : 'Add User'}
+      </h1>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
+        <div className="mb-4">
           <label
             htmlFor="name"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-sm font-semibold text-gray-700 mb-2"
           >
             Name
           </label>
@@ -99,19 +107,14 @@ export default function AddUserPage() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-        <div style={{ marginBottom: '15px' }}>
+        <div className="mb-4">
           <label
             htmlFor="email"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-sm font-semibold text-gray-700 mb-2"
           >
             Email
           </label>
@@ -120,19 +123,14 @@ export default function AddUserPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-        <div style={{ marginBottom: '15px' }}>
+        <div className="mb-4">
           <label
             htmlFor="role"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-sm font-semibold text-gray-700 mb-2"
           >
             Role
           </label>
@@ -140,36 +138,23 @@ export default function AddUserPage() {
             id="role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
+            className="w-full p-3 border border-gray-300 text-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="Officer">Officer</option>
             <option value="Admin">Admin</option>
           </select>
         </div>
-        {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
+
+        {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
         {successMessage && (
-          <p style={{ color: 'green', marginBottom: '15px' }}>
-            {successMessage}
-          </p>
+          <p className="text-green-600 text-sm mb-4">{successMessage}</p>
         )}
+
         <button
           type="submit"
-          style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
+          className="w-full p-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-300"
         >
-          {id ? 'Update User' : 'Add User'}
+          {userId ? 'Update User' : 'Add User'}
         </button>
       </form>
     </div>

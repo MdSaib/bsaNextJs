@@ -2,12 +2,17 @@
 
 import React, { useState } from 'react';
 
+interface DateRange {
+  start: string;
+  end: string;
+}
+
 export default function ExportReportsPage() {
-  const [reportType, setReportType] = useState('');
-  const [dateRange, setDateRange] = useState({ start: '', end: '' });
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [reportType, setReportType] = useState<string>('');
+  const [dateRange, setDateRange] = useState<DateRange>({ start: '', end: '' });
+  const [error, setError] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleExport = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -34,117 +39,88 @@ export default function ExportReportsPage() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>Export Reports</h1>
-      <p style={{ textAlign: 'center' }}>
-        Select the report type and date range to export system reports.
-      </p>
-      <form onSubmit={handleExport}>
-        <div style={{ marginBottom: '15px' }}>
-          <label
-            htmlFor="reportType"
-            style={{ display: 'block', marginBottom: '5px' }}
+    <div className="max-w-4xl mx-auto p-8 bg-gray-50 min-h-screen">
+      <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
+        <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-6">
+          Export Reports
+        </h1>
+        <p className="text-center text-lg text-gray-600 mb-8">
+          Select the report type and date range to export system reports.
+        </p>
+        <form onSubmit={handleExport}>
+          <div className="mb-6">
+            <label
+              htmlFor="reportType"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Report Type
+            </label>
+            <select
+              id="reportType"
+              value={reportType}
+              onChange={(e) => setReportType(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            >
+              <option value="">Select Report Type</option>
+              <option value="File Processing">File Processing</option>
+              <option value="User Activity">User Activity</option>
+              <option value="System Performance">System Performance</option>
+            </select>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label
+                htmlFor="startDate"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Start Date
+              </label>
+              <input
+                id="startDate"
+                type="date"
+                value={dateRange.start}
+                onChange={(e) =>
+                  setDateRange({ ...dateRange, start: e.target.value })
+                }
+                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="endDate"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                End Date
+              </label>
+              <input
+                id="endDate"
+                type="date"
+                value={dateRange.end}
+                onChange={(e) =>
+                  setDateRange({ ...dateRange, end: e.target.value })
+                }
+                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                required
+              />
+            </div>
+          </div>
+          {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
+          {successMessage && (
+            <p className="text-green-600 text-sm mb-4">{successMessage}</p>
+          )}
+          {loading && (
+            <p className="text-blue-600 text-sm mb-4">Exporting report...</p>
+          )}
+          <button
+            type="submit"
+            className="w-full py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
           >
-            Report Type
-          </label>
-          <select
-            id="reportType"
-            value={reportType}
-            onChange={(e) => setReportType(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
-            required
-          >
-            <option value="">Select Report Type</option>
-            <option value="File Processing">File Processing</option>
-            <option value="User Activity">User Activity</option>
-            <option value="System Performance">System Performance</option>
-          </select>
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label
-            htmlFor="startDate"
-            style={{ display: 'block', marginBottom: '5px' }}
-          >
-            Start Date
-          </label>
-          <input
-            id="startDate"
-            type="date"
-            value={dateRange.start}
-            onChange={(e) =>
-              setDateRange({ ...dateRange, start: e.target.value })
-            }
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label
-            htmlFor="endDate"
-            style={{ display: 'block', marginBottom: '5px' }}
-          >
-            End Date
-          </label>
-          <input
-            id="endDate"
-            type="date"
-            value={dateRange.end}
-            onChange={(e) =>
-              setDateRange({ ...dateRange, end: e.target.value })
-            }
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
-        {successMessage && (
-          <p style={{ color: 'green', marginBottom: '15px' }}>
-            {successMessage}
-          </p>
-        )}
-        {loading && (
-          <p style={{ color: 'blue', marginBottom: '15px' }}>
-            Exporting report...
-          </p>
-        )}
-        <button
-          type="submit"
-          style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          Export Report
-        </button>
-      </form>
+            Export Report
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

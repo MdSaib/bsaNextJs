@@ -2,18 +2,24 @@
 
 import React, { useState, useEffect } from 'react';
 
+interface User {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+}
+
 export default function UserManagementPage() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    // Simulate an API call to fetch user data
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        // Replace this mock data with an actual API call
-        const mockUsers = [
+        // Simulating an API call to fetch user data
+        const mockUsers: User[] = [
           {
             id: '1',
             name: 'John Doe',
@@ -45,94 +51,84 @@ export default function UserManagementPage() {
   }, []);
 
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>User Management</h1>
-      <p style={{ textAlign: 'center' }}>
-        View and manage users in the system.
-      </p>
-      {loading && <p>Loading users...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {!loading && !error && users.length > 0 && (
-        <table
-          style={{
-            width: '100%',
-            borderCollapse: 'collapse',
-            marginTop: '20px',
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>ID</th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
-                Name
-              </th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
-                Role
-              </th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
-                Email
-              </th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td style={{ border: '1px solid #ccc', padding: '10px' }}>
-                  {user.id}
-                </td>
-                <td style={{ border: '1px solid #ccc', padding: '10px' }}>
-                  {user.name}
-                </td>
-                <td style={{ border: '1px solid #ccc', padding: '10px' }}>
-                  {user.role}
-                </td>
-                <td style={{ border: '1px solid #ccc', padding: '10px' }}>
-                  {user.email}
-                </td>
-                <td style={{ border: '1px solid #ccc', padding: '10px' }}>
-                  <a
-                    href={`/admin/add-user?id=${user.id}`}
-                    style={{
-                      color: '#0070f3',
-                      textDecoration: 'none',
-                      marginRight: '10px',
-                    }}
-                  >
-                    Edit
-                  </a>
-                  <button
-                    onClick={() => alert(`Delete user ${user.name}`)}
-                    style={{
-                      color: 'white',
-                      background: 'red',
-                      border: 'none',
-                      borderRadius: '5px',
-                      padding: '5px 10px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {!loading && !error && users.length === 0 && (
-        <p>No users found in the system.</p>
-      )}
+    <div className="max-w-6xl mx-auto px-4 py-8 bg-gray-50 min-h-screen">
+      <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-200">
+        <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">
+          User Management
+        </h1>
+        <p className="text-center text-lg text-gray-600 mb-8">
+          View and manage users in the system.
+        </p>
+
+        {loading && (
+          <p className="text-center text-blue-600">Loading users...</p>
+        )}
+        {error && <p className="text-center text-red-600">{error}</p>}
+
+        {!loading && !error && users.length > 0 && (
+          <div className="overflow-x-auto">
+            <table className="min-w-full table-auto border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border border-gray-300">
+                    ID
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border border-gray-300">
+                    Name
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border border-gray-300">
+                    Role
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border border-gray-300">
+                    Email
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border border-gray-300">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-2 text-sm text-gray-700 border border-gray-300">
+                      {user.id}
+                    </td>
+                    <td className="px-4 py-2 text-sm text-gray-700 border border-gray-300">
+                      {user.name}
+                    </td>
+                    <td className="px-4 py-2 text-sm text-gray-700 border border-gray-300">
+                      {user.role}
+                    </td>
+                    <td className="px-4 py-2 text-sm text-gray-700 border border-gray-300">
+                      {user.email}
+                    </td>
+                    <td className="px-4 py-2 text-sm text-gray-700 border border-gray-300">
+                      <a
+                        href={`/admin/edit-user?id=${user.id}`}
+                        className="text-indigo-600 hover:text-indigo-800 mr-4"
+                      >
+                        Edit
+                      </a>
+                      <button
+                        onClick={() => alert(`Delete user ${user.name}`)}
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {!loading && !error && users.length === 0 && (
+          <p className="text-center text-gray-600">
+            No users found in the system.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

@@ -11,24 +11,14 @@ export default function InternalServerErrorPage() {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px', padding: '20px' }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '20px', color: 'red' }}>
-        500
-      </h1>
-      <p style={{ fontSize: '1.5rem', marginBottom: '20px' }}>
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center bg-gray-100">
+      <h1 className="text-6xl font-bold text-red-600 mb-6">500</h1>
+      <p className="text-xl mb-6 text-gray-800">
         Something went wrong on our end. Please try again later.
       </p>
       <button
         onClick={handleGoBack}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: '#0070f3',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          fontSize: '1rem',
-          cursor: 'pointer',
-        }}
+        className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg hover:bg-blue-700 transition-all duration-300"
       >
         Go Back to Home
       </button>
