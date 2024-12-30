@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 
@@ -37,20 +37,38 @@ export default function FileStatusCheckPage() {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '600px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>File Status Check</h1>
       <p style={{ textAlign: 'center' }}>
         Enter the File ID to check its current status and workflow progress.
       </p>
       <form onSubmit={handleCheckStatus} style={{ marginBottom: '20px' }}>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="fileId" style={{ display: 'block', marginBottom: '5px' }}>File ID</label>
+          <label
+            htmlFor="fileId"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            File ID
+          </label>
           <input
             id="fileId"
             type="text"
             value={fileId}
             onChange={(e) => setFileId(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
@@ -74,9 +92,15 @@ export default function FileStatusCheckPage() {
       {fileStatus && (
         <div style={{ marginTop: '20px' }}>
           <h2>{fileStatus.title}</h2>
-          <p><strong>File ID:</strong> {fileStatus.id}</p>
-          <p><strong>Current Location:</strong> {fileStatus.currentLocation}</p>
-          <p><strong>Status:</strong> {fileStatus.status}</p>
+          <p>
+            <strong>File ID:</strong> {fileStatus.id}
+          </p>
+          <p>
+            <strong>Current Location:</strong> {fileStatus.currentLocation}
+          </p>
+          <p>
+            <strong>Status:</strong> {fileStatus.status}
+          </p>
           <h3>Completed Steps</h3>
           <ul>
             {fileStatus.completedSteps.map((step, index) => (

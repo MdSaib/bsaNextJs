@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,9 @@ export default function InternalServerErrorPage() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px', padding: '20px' }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '20px', color: 'red' }}>500</h1>
+      <h1 style={{ fontSize: '3rem', marginBottom: '20px', color: 'red' }}>
+        500
+      </h1>
       <p style={{ fontSize: '1.5rem', marginBottom: '20px' }}>
         Something went wrong on our end. Please try again later.
       </p>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -20,28 +20,56 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '400px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>Login</h1>
       <form onSubmit={handleLogin}>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>Email</label>
+          <label
+            htmlFor="email"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Email
+          </label>
           <input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="password" style={{ display: 'block', marginBottom: '5px' }}>Password</label>
+          <label
+            htmlFor="password"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Password
+          </label>
           <input
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
@@ -62,7 +90,11 @@ export default function LoginPage() {
         </button>
       </form>
       <p style={{ marginTop: '20px', textAlign: 'center' }}>
-        <Link legacyBehavior href="/auth/forgot-password"><a style={{ color: '#0070f3', textDecoration: 'none' }}>Forgot Password?</a></Link>
+        <Link legacyBehavior href="/auth/forgot-password">
+          <a style={{ color: '#0070f3', textDecoration: 'none' }}>
+            Forgot Password?
+          </a>
+        </Link>
       </p>
     </div>
   );

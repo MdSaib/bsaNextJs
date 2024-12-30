@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 
@@ -34,19 +34,37 @@ export default function ExportReportsPage() {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '600px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>Export Reports</h1>
       <p style={{ textAlign: 'center' }}>
         Select the report type and date range to export system reports.
       </p>
       <form onSubmit={handleExport}>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="reportType" style={{ display: 'block', marginBottom: '5px' }}>Report Type</label>
+          <label
+            htmlFor="reportType"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Report Type
+          </label>
           <select
             id="reportType"
             value={reportType}
             onChange={(e) => setReportType(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           >
             <option value="">Select Report Type</option>
@@ -56,30 +74,62 @@ export default function ExportReportsPage() {
           </select>
         </div>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="startDate" style={{ display: 'block', marginBottom: '5px' }}>Start Date</label>
+          <label
+            htmlFor="startDate"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Start Date
+          </label>
           <input
             id="startDate"
             type="date"
             value={dateRange.start}
-            onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            onChange={(e) =>
+              setDateRange({ ...dateRange, start: e.target.value })
+            }
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="endDate" style={{ display: 'block', marginBottom: '5px' }}>End Date</label>
+          <label
+            htmlFor="endDate"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            End Date
+          </label>
           <input
             id="endDate"
             type="date"
             value={dateRange.end}
-            onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            onChange={(e) =>
+              setDateRange({ ...dateRange, end: e.target.value })
+            }
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
         {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
-        {successMessage && <p style={{ color: 'green', marginBottom: '15px' }}>{successMessage}</p>}
-        {loading && <p style={{ color: 'blue', marginBottom: '15px' }}>Exporting report...</p>}
+        {successMessage && (
+          <p style={{ color: 'green', marginBottom: '15px' }}>
+            {successMessage}
+          </p>
+        )}
+        {loading && (
+          <p style={{ color: 'blue', marginBottom: '15px' }}>
+            Exporting report...
+          </p>
+        )}
         <button
           type="submit"
           style={{

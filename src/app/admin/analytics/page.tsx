@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -32,10 +32,19 @@ export default function AnalyticsPage() {
   }, []);
 
   return (
-    <div style={{ maxWidth: '800px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '800px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>Analytics Dashboard</h1>
       <p style={{ textAlign: 'center' }}>
-        View detailed statistics about the system's performance and file processing.
+        View detailed statistics about the system's performance and file
+        processing.
       </p>
       {loading && <p>Loading analytics...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -43,10 +52,19 @@ export default function AnalyticsPage() {
         <div style={{ marginTop: '20px' }}>
           <h2>Overview</h2>
           <ul>
-            <li><strong>Total Files:</strong> {analytics.totalFiles}</li>
-            <li><strong>Files In Progress:</strong> {analytics.filesInProgress}</li>
-            <li><strong>Completed Files:</strong> {analytics.completedFiles}</li>
-            <li><strong>Average Processing Time:</strong> {analytics.averageProcessingTime}</li>
+            <li>
+              <strong>Total Files:</strong> {analytics.totalFiles}
+            </li>
+            <li>
+              <strong>Files In Progress:</strong> {analytics.filesInProgress}
+            </li>
+            <li>
+              <strong>Completed Files:</strong> {analytics.completedFiles}
+            </li>
+            <li>
+              <strong>Average Processing Time:</strong>{' '}
+              {analytics.averageProcessingTime}
+            </li>
           </ul>
           <h3>Bottleneck Departments</h3>
           <ul>

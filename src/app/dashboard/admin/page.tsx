@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -46,9 +46,7 @@ export default function AdminDashboard() {
             <li>Total Files: {analytics.totalFiles}</li>
             <li>Files In Progress: {analytics.filesInProgress}</li>
             <li>Completed Files: {analytics.completedFiles}</li>
-            <li>
-              Average Processing Time: {analytics.averageProcessingTime}
-            </li>
+            <li>Average Processing Time: {analytics.averageProcessingTime}</li>
           </ul>
           <h2>Bottleneck Departments</h2>
           <ul>

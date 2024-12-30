@@ -1,12 +1,12 @@
 export default function AddUserPage() {
-    return (
-      <div>
-        <h1>Add/Edit User</h1>
-        <p>Use this page to add a new user or edit an existing user account.</p>
-      </div>
-    );
-  }
-  "use client";
+  return (
+    <div>
+      <h1>Add/Edit User</h1>
+      <p>Use this page to add a new user or edit an existing user account.</p>
+    </div>
+  );
+}
+('use client');
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -76,45 +76,87 @@ export default function AddUserPage() {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '600px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>{id ? 'Edit User' : 'Add User'}</h1>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="name" style={{ display: 'block', marginBottom: '5px' }}>Name</label>
+          <label
+            htmlFor="name"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Name
+          </label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>Email</label>
+          <label
+            htmlFor="email"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Email
+          </label>
           <input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
             required
           />
         </div>
         <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="role" style={{ display: 'block', marginBottom: '5px' }}>Role</label>
+          <label
+            htmlFor="role"
+            style={{ display: 'block', marginBottom: '5px' }}
+          >
+            Role
+          </label>
           <select
             id="role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{
+              width: '100%',
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+            }}
           >
             <option value="Officer">Officer</option>
             <option value="Admin">Admin</option>
           </select>
         </div>
         {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
-        {successMessage && <p style={{ color: 'green', marginBottom: '15px' }}>{successMessage}</p>}
+        {successMessage && (
+          <p style={{ color: 'green', marginBottom: '15px' }}>
+            {successMessage}
+          </p>
+        )}
         <button
           type="submit"
           style={{

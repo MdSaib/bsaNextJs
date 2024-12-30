@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -14,9 +14,24 @@ export default function NotificationsPage() {
         setLoading(true);
         // Replace this mock data with an actual API call
         const mockNotifications = [
-          { id: '1', message: 'File 123 has been approved.', type: 'success', timestamp: '2024-01-01 10:00 AM' },
-          { id: '2', message: 'File 456 is pending review.', type: 'info', timestamp: '2024-01-02 02:00 PM' },
-          { id: '3', message: 'Workflow step failed for File 789.', type: 'error', timestamp: '2024-01-03 05:00 PM' },
+          {
+            id: '1',
+            message: 'File 123 has been approved.',
+            type: 'success',
+            timestamp: '2024-01-01 10:00 AM',
+          },
+          {
+            id: '2',
+            message: 'File 456 is pending review.',
+            type: 'info',
+            timestamp: '2024-01-02 02:00 PM',
+          },
+          {
+            id: '3',
+            message: 'Workflow step failed for File 789.',
+            type: 'error',
+            timestamp: '2024-01-03 05:00 PM',
+          },
         ];
         setNotifications(mockNotifications);
         setLoading(false);
@@ -30,7 +45,15 @@ export default function NotificationsPage() {
   }, []);
 
   return (
-    <div style={{ maxWidth: '800px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '800px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>Notifications</h1>
       <p style={{ textAlign: 'center' }}>
         View the latest system notifications and alerts below.
@@ -61,7 +84,9 @@ export default function NotificationsPage() {
                     : '#ffe6e6',
               }}
             >
-              <p style={{ margin: '0', fontWeight: 'bold' }}>{notification.message}</p>
+              <p style={{ margin: '0', fontWeight: 'bold' }}>
+                {notification.message}
+              </p>
               <small style={{ color: '#555' }}>{notification.timestamp}</small>
             </li>
           ))}

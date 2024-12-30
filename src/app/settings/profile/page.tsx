@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 
@@ -33,41 +33,80 @@ export default function ProfileSettingsPage() {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div
+      style={{
+        maxWidth: '600px',
+        margin: '50px auto',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+      }}
+    >
       <h1 style={{ textAlign: 'center' }}>Profile Settings</h1>
-      <p style={{ textAlign: 'center' }}>Manage your personal profile settings.</p>
-      {successMessage && <p style={{ color: 'green', marginBottom: '15px' }}>{successMessage}</p>}
+      <p style={{ textAlign: 'center' }}>
+        Manage your personal profile settings.
+      </p>
+      {successMessage && (
+        <p style={{ color: 'green', marginBottom: '15px' }}>{successMessage}</p>
+      )}
       {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
       <div style={{ marginBottom: '15px' }}>
-        <label htmlFor="name" style={{ display: 'block', marginBottom: '5px' }}>Name</label>
+        <label htmlFor="name" style={{ display: 'block', marginBottom: '5px' }}>
+          Name
+        </label>
         <input
           id="name"
           type="text"
           value={profile.name}
           onChange={(e) => handleInputChange('name', e.target.value)}
-          style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+          }}
           required
         />
       </div>
       <div style={{ marginBottom: '15px' }}>
-        <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>Email</label>
+        <label
+          htmlFor="email"
+          style={{ display: 'block', marginBottom: '5px' }}
+        >
+          Email
+        </label>
         <input
           id="email"
           type="email"
           value={profile.email}
           onChange={(e) => handleInputChange('email', e.target.value)}
-          style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+          }}
           required
         />
       </div>
       <div style={{ marginBottom: '15px' }}>
-        <label htmlFor="password" style={{ display: 'block', marginBottom: '5px' }}>Password (Leave blank to keep current password)</label>
+        <label
+          htmlFor="password"
+          style={{ display: 'block', marginBottom: '5px' }}
+        >
+          Password (Leave blank to keep current password)
+        </label>
         <input
           id="password"
           type="password"
           value={profile.password}
           onChange={(e) => handleInputChange('password', e.target.value)}
-          style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{
+            width: '100%',
+            padding: '10px',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+          }}
         />
       </div>
       <button

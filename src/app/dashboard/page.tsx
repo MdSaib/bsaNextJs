@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
@@ -47,10 +47,18 @@ export default function OfficerDashboard() {
         >
           <thead>
             <tr>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>File ID</th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>Title</th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>Status</th>
-              <th style={{ border: '1px solid #ccc', padding: '10px' }}>Actions</th>
+              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
+                File ID
+              </th>
+              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
+                Title
+              </th>
+              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
+                Status
+              </th>
+              <th style={{ border: '1px solid #ccc', padding: '10px' }}>
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
