@@ -33,29 +33,26 @@ export default function SupportPage() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>Support</h1>
-      <p style={{ textAlign: 'center' }}>
+    <div className="max-w-3xl mx-auto p-8 bg-white shadow-xl rounded-xl mt-12">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        Support
+      </h1>
+      <p className="text-lg text-center text-gray-600 mb-8">
         Need help? Fill out the form below, and our team will get back to you
         shortly.
       </p>
+
       {successMessage && (
-        <p style={{ color: 'green', marginBottom: '15px' }}>{successMessage}</p>
+        <p className="text-green-600 text-center mb-6">{successMessage}</p>
       )}
-      {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
+      {error && <p className="text-red-600 text-center mb-6">{error}</p>}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Name */}
+        <div>
           <label
             htmlFor="name"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-lg font-semibold text-gray-700 mb-2"
           >
             Name
           </label>
@@ -64,19 +61,16 @@ export default function SupportPage() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
+            className="w-full p-4 border-2 border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
             required
           />
         </div>
-        <div style={{ marginBottom: '15px' }}>
+
+        {/* Email */}
+        <div>
           <label
             htmlFor="email"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-lg font-semibold text-gray-700 mb-2"
           >
             Email
           </label>
@@ -85,19 +79,16 @@ export default function SupportPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
+            className="w-full p-4 border-2 border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300"
             required
           />
         </div>
-        <div style={{ marginBottom: '15px' }}>
+
+        {/* Message */}
+        <div>
           <label
             htmlFor="message"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-lg font-semibold text-gray-700 mb-2"
           >
             Message
           </label>
@@ -105,43 +96,27 @@ export default function SupportPage() {
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-              height: '100px',
-            }}
+            className="w-full p-4 border-2 border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 h-32 resize-none"
             required
           />
         </div>
-        <button
-          type="submit"
-          style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          Submit
-        </button>
+
+        {/* Submit Button */}
+        <div className="mt-6">
+          <button
+            type="submit"
+            className="w-full py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-300"
+          >
+            Submit
+          </button>
+        </div>
       </form>
-      <p
-        style={{
-          marginTop: '20px',
-          textAlign: 'center',
-          fontSize: '14px',
-          color: '#555',
-        }}
-      >
+
+      <p className="mt-8 text-center text-sm text-gray-500">
         You can also reach us at{' '}
         <a
           href="mailto:support@example.com"
-          style={{ color: '#0070f3', textDecoration: 'none' }}
+          className="text-blue-600 hover:text-blue-800"
         >
           support@example.com
         </a>

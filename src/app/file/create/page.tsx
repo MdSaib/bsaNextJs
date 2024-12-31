@@ -32,101 +32,81 @@ export default function CreateFilePage() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>Create New File</h1>
+    <div className="max-w-4xl mx-auto px-6 py-12 bg-white shadow-lg rounded-xl border border-gray-300 mt-12">
+      <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+        Create New File
+      </h1>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
-          <label
-            htmlFor="title"
-            style={{ display: 'block', marginBottom: '5px' }}
+        <div className="space-y-6">
+          {/* Title Field */}
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-lg font-medium text-gray-700 mb-2"
+            >
+              Title
+            </label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              required
+            />
+          </div>
+
+          {/* Description Field */}
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-lg font-medium text-gray-700 mb-2"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              rows={4}
+              required
+            />
+          </div>
+
+          {/* Workflow Field */}
+          <div>
+            <label
+              htmlFor="workflow"
+              className="block text-lg font-medium text-gray-700 mb-2"
+            >
+              Workflow (Departments/Officers)
+            </label>
+            <input
+              id="workflow"
+              type="text"
+              value={workflow}
+              onChange={(e) => setWorkflow(e.target.value)}
+              placeholder="Enter departments separated by commas (e.g., Dept1, Dept2)"
+              className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              required
+            />
+          </div>
+
+          {/* Error and Success Messages */}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
+          {successMessage && (
+            <p className="text-green-600 text-sm">{successMessage}</p>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-indigo-600 text-white font-semibold text-lg rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
           >
-            Title
-          </label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
-            required
-          />
+            Create File
+          </button>
         </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label
-            htmlFor="description"
-            style={{ display: 'block', marginBottom: '5px' }}
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-              height: '100px',
-            }}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label
-            htmlFor="workflow"
-            style={{ display: 'block', marginBottom: '5px' }}
-          >
-            Workflow (Departments/Officers)
-          </label>
-          <input
-            id="workflow"
-            type="text"
-            value={workflow}
-            onChange={(e) => setWorkflow(e.target.value)}
-            placeholder="Enter departments separated by commas (e.g., Dept1, Dept2)"
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
-        {successMessage && (
-          <p style={{ color: 'green', marginBottom: '15px' }}>
-            {successMessage}
-          </p>
-        )}
-        <button
-          type="submit"
-          style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          Create File
-        </button>
       </form>
     </div>
   );

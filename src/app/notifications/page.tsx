@@ -2,8 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 
+type Notification = {
+  id: string;
+  message: string;
+  type: 'success' | 'info' | 'error';
+  timestamp: string;
+};
+
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -13,7 +20,7 @@ export default function NotificationsPage() {
       try {
         setLoading(true);
         // Replace this mock data with an actual API call
-        const mockNotifications = [
+        const mockNotifications: Notification[] = [
           {
             id: '1',
             message: 'File 123 has been approved.',
@@ -45,55 +52,45 @@ export default function NotificationsPage() {
   }, []);
 
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>Notifications</h1>
-      <p style={{ textAlign: 'center' }}>
+    <div className="max-w-4xl mx-auto px-6 py-8 bg-white shadow-lg rounded-xl border border-gray-300 mt-12">
+      <h1 className="text-3xl font-semibold text-center text-gray-800 mb-4">
+        Notifications
+      </h1>
+      <p className="text-center text-gray-600 mb-8">
         View the latest system notifications and alerts below.
       </p>
-      {loading && <p>Loading notifications...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {loading && (
+        <p className="text-center text-gray-500">Loading notifications...</p>
+      )}
+      {error && <p className="text-center text-red-600">{error}</p>}
+
       {!loading && !error && notifications.length > 0 && (
-        <ul style={{ listStyle: 'none', padding: '0', marginTop: '20px' }}>
+        <ul className="space-y-4">
           {notifications.map((notification) => (
             <li
               key={notification.id}
-              style={{
-                marginBottom: '15px',
-                padding: '10px',
-                borderRadius: '5px',
-                border: `1px solid ${
-                  notification.type === 'success'
-                    ? 'green'
-                    : notification.type === 'info'
-                    ? 'blue'
-                    : 'red'
-                }`,
-                backgroundColor:
-                  notification.type === 'success'
-                    ? '#e6ffe6'
-                    : notification.type === 'info'
-                    ? '#e6f7ff'
-                    : '#ffe6e6',
-              }}
+              className={`p-4 rounded-lg border-l-4 ${
+                notification.type === 'success'
+                  ? 'border-green-500 bg-green-100'
+                  : notification.type === 'info'
+                  ? 'border-blue-500 bg-blue-100'
+                  : 'border-red-500 bg-red-100'
+              }`}
             >
-              <p style={{ margin: '0', fontWeight: 'bold' }}>
+              <p className="font-semibold text-gray-800">
                 {notification.message}
               </p>
-              <small style={{ color: '#555' }}>{notification.timestamp}</small>
+              <small className="text-gray-500">{notification.timestamp}</small>
             </li>
           ))}
         </ul>
       )}
+
       {!loading && !error && notifications.length === 0 && (
-        <p>No notifications available at the moment.</p>
+        <p className="text-center text-gray-500">
+          No notifications available at the moment.
+        </p>
       )}
     </div>
   );
