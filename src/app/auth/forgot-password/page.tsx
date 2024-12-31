@@ -4,10 +4,9 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 export default function ForgotPasswordPage() {
-  // Default export here
-  const [email, setEmail] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const handleForgotPassword = (event: React.FormEvent) => {
     event.preventDefault();
@@ -19,29 +18,23 @@ export default function ForgotPasswordPage() {
 
     // Simulate a successful password reset request
     setSuccessMessage(`A password reset link has been sent to ${email}.`);
-    setError(''); // Clear previous errors
-    setEmail(''); // Reset the email input field
+    setError('');
+    setEmail('');
   };
 
   return (
-    <div
-      style={{
-        maxWidth: '400px',
-        margin: '50px auto',
-        padding: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-      }}
-    >
-      <h1 style={{ textAlign: 'center' }}>Forgot Password</h1>
-      <p style={{ textAlign: 'center' }}>
+    <div className="max-w-sm mx-auto p-6 bg-white rounded-lg shadow-xl border border-gray-200 mt-16">
+      <h1 className="text-2xl font-bold text-center text-gray-900 mb-4">
+        Forgot Password
+      </h1>
+      <p className="text-center text-gray-600 mb-6">
         Enter your email to receive a password reset link.
       </p>
       <form onSubmit={handleForgotPassword}>
-        <div style={{ marginBottom: '15px' }}>
+        <div className="mb-4">
           <label
             htmlFor="email"
-            style={{ display: 'block', marginBottom: '5px' }}
+            className="block text-sm font-medium text-gray-700 mb-2"
           >
             Email
           </label>
@@ -50,41 +43,24 @@ export default function ForgotPasswordPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
         </div>
-        {error && <p style={{ color: 'red', marginBottom: '15px' }}>{error}</p>}
+        {error && <p className="text-sm text-red-500 mb-4">{error}</p>}
         {successMessage && (
-          <p style={{ color: 'green', marginBottom: '15px' }}>
-            {successMessage}
-          </p>
+          <p className="text-sm text-green-500 mb-4">{successMessage}</p>
         )}
         <button
           type="submit"
-          style={{
-            width: '100%',
-            padding: '10px',
-            backgroundColor: '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
+          className="w-full p-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
           Submit
         </button>
       </form>
-      <p style={{ marginTop: '20px', textAlign: 'center' }}>
+      <p className="mt-6 text-center text-gray-700">
         <Link legacyBehavior href="/auth/login">
-          <a style={{ color: '#0070f3', textDecoration: 'none' }}>
-            Back to Login
-          </a>
+          <a className="text-indigo-600 hover:text-indigo-700">Back to Login</a>
         </Link>
       </p>
     </div>

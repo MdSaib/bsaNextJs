@@ -2,10 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 
+interface Analytics {
+  totalFiles: number;
+  filesInProgress: number;
+  completedFiles: number;
+  bottleneckDepartments: string[];
+  averageProcessingTime: string;
+}
+
 export default function AdminDashboard() {
-  const [analytics, setAnalytics] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [analytics, setAnalytics] = useState<Analytics | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     // Simulate an API call to fetch analytics data
@@ -32,61 +40,100 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div style={{ maxWidth: '800px', margin: '50px auto', padding: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>Admin Dashboard</h1>
-      <p style={{ textAlign: 'center' }}>
-        Monitor system performance and file processing statistics below.
+    <div className="max-w-7xl mx-auto p-8 bg-white rounded-xl shadow-lg border border-gray-200 mt-16">
+      <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-6">
+        Admin Dashboard
+      </h1>
+      <p className="text-center text-xl text-gray-600 mb-10">
+        Stay on top of system performance and file processing efficiency.
       </p>
-      {loading && <p>Loading analytics...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {loading && (
+        <div className="text-center text-gray-500">
+          <p>Loading analytics...</p>
+          <div className="mt-4 animate-spin rounded-full h-12 w-12 border-t-4 border-indigo-600 border-solid"></div>
+        </div>
+      )}
+
+      {error && <p className="text-center text-red-600 text-lg">{error}</p>}
+
       {!loading && !error && analytics && (
-        <div style={{ marginTop: '20px' }}>
-          <h2>System Overview</h2>
-          <ul>
-            <li>Total Files: {analytics.totalFiles}</li>
-            <li>Files In Progress: {analytics.filesInProgress}</li>
-            <li>Completed Files: {analytics.completedFiles}</li>
-            <li>Average Processing Time: {analytics.averageProcessingTime}</li>
-          </ul>
-          <h2>Bottleneck Departments</h2>
-          <ul>
-            {analytics.bottleneckDepartments.map((dept, index) => (
-              <li key={index}>{dept}</li>
-            ))}
-          </ul>
-          <div style={{ marginTop: '20px' }}>
+        <div>
+          <section>
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+              System Overview
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gray-50 p-6 rounded-xl shadow-md">
+                <h3 className="text-lg font-semibold text-gray-700">
+                  Total Files
+                </h3>
+                <p className="text-3xl font-bold text-indigo-600">
+                  {analytics.totalFiles}
+                </p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-xl shadow-md">
+                <h3 className="text-lg font-semibold text-gray-700">
+                  Files In Progress
+                </h3>
+                <p className="text-3xl font-bold text-indigo-600">
+                  {analytics.filesInProgress}
+                </p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-xl shadow-md">
+                <h3 className="text-lg font-semibold text-gray-700">
+                  Completed Files
+                </h3>
+                <p className="text-3xl font-bold text-green-600">
+                  {analytics.completedFiles}
+                </p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-xl shadow-md">
+                <h3 className="text-lg font-semibold text-gray-700">
+                  Average Processing Time
+                </h3>
+                <p className="text-3xl font-bold text-gray-700">
+                  {analytics.averageProcessingTime}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+              Bottleneck Departments
+            </h2>
+            <ul className="list-none space-y-4 text-lg text-gray-700">
+              {analytics.bottleneckDepartments.map((dept, index) => (
+                <li key={index} className="flex items-center space-x-2">
+                  <span className="text-red-600">🔴</span>
+                  <span>{dept}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="mt-12 flex justify-center gap-6 flex-wrap">
             <a
               href="/admin/analytics"
-              style={{
-                display: 'inline-block',
-                padding: '10px 20px',
-                backgroundColor: '#0070f3',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '5px',
-                marginRight: '10px',
-              }}
+              className="inline-block px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out w-full sm:w-auto text-center"
             >
               View Detailed Analytics
             </a>
             <a
               href="/admin/reports"
-              style={{
-                display: 'inline-block',
-                padding: '10px 20px',
-                backgroundColor: '#0070f3',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '5px',
-              }}
+              className="inline-block px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out w-full sm:w-auto text-center"
             >
               Export Reports
             </a>
-          </div>
+          </section>
         </div>
       )}
+
       {!loading && !error && !analytics && (
-        <p>No analytics data available at the moment.</p>
+        <p className="text-center text-gray-500 text-lg">
+          No analytics data available at the moment.
+        </p>
       )}
     </div>
   );
